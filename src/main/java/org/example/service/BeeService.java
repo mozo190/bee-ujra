@@ -2,6 +2,7 @@ package org.example.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.domain.Bee;
+import org.example.domain.BeeType;
 import org.example.domain.Hive;
 import org.example.dto.BeeInfo;
 import org.example.dto.BeeSaveCommand;
@@ -62,5 +63,15 @@ public class BeeService {
         Bee bee = findBeeById (id);
         modelMapper.map (command, bee);
         return modelMapper.map (bee, BeeInfo.class);
+    }
+    public void deleteBee(Integer id) {
+        Bee bee = findBeeById (id);
+        beeRepository.delete (bee);
+    }
+    public List<BeeInfo> findByType(BeeType beeType){
+        List<Bee> beeList = beeRepository.findByBeeType (beeType);
+        return beeList.stream ()
+                .map (bee -> modelMapper.map (bee, BeeInfo.class))
+                .collect (Collectors.toList ());
     }
 }

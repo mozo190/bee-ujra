@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.domain.BeeType;
 import org.example.dto.BeeInfo;
 import org.example.dto.BeeSaveCommand;
 import org.example.dto.BeeUpdateCommand;
@@ -51,6 +52,12 @@ public class BeeController {
                                           @Valid @RequestBody BeeUpdateCommand command) {
         log.info ("Http request, PUT /api/bee/{beeId} body: " + command.toString () + " with variable: " + id);
         BeeInfo bee = beeService.updateBee (id, command);
+        return new ResponseEntity<> (bee, HttpStatus.OK);
+    }
+    @GetMapping("/type")
+    public ResponseEntity<List<BeeInfo>> findByType(@RequestParam(value = "type", required = false) BeeType type) {
+        log.info ("Http request, GET / /api/bee/type with variable: " + type);
+        List<BeeInfo> bee = beeService.findByType (type);
         return new ResponseEntity<> (bee, HttpStatus.OK);
     }
 }
