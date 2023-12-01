@@ -6,6 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BeeUjraApplication {
     public static void main(String[] args) {
-        SpringApplication.run(BeeUjraApplication.class, args);
+        SpringApplication.run (BeeUjraApplication.class, args);
     }
 }
